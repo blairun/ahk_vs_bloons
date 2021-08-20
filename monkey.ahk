@@ -38,6 +38,9 @@ F6:: ; back / home screen
 to_menu()
 return
 
+F7:: ; play pause / unused
+return
+
 F8:: ; play / unpause
 outputdebug, playing
 pause, off
