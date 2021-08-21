@@ -7,8 +7,10 @@ AutoHotKey scripts to interact with BTD6
 Download AutoHotKey - https://www.autohotkey.com/download/
 
 Get BTD6 on PC/computer - https://store.steampowered.com/app/960090/Bloons_TD_6/
+Play the game manually until most monkeys and monkey research are fully unlocked, otherwise Level Up notifications and New Hero notifications will interfere with the automations.
 
 Download a debug viewer - ex: DebugView++ https://github.com/CobaltFusion/DebugViewPP
+OR Debug directly in Visual Studio Code using the AutoHotkey Plus extension
 
 ## How to
 
