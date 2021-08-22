@@ -1,12 +1,21 @@
 #include more_monkey/helper_monkey.ahk
 
-global always_ability := [false]
-global bananas_pickup := [false]
+; ***************************
+; ***        notes        ***
+; ***************************
+; debug script/sandbox
+
+; ***************************
+; ***        issues       ***
+; ***************************
+; n/a
 
 monkey_meadow_sandbox() ; monkey knowledge maxed
 {
   info_hero(PAT(), A_LineFile)
   prep(MONKEY_MEADOW(), [EASY(), SANDBOX()])
+  global always_ability := [false]
+  global bananas_pickup := [false]
   farm := farm(1136, 172)
   upgrade(farm, 3)
   upgrade(farm, 3)
