@@ -141,7 +141,7 @@ upgrade_description(monkey, path)
         out = target
     }
   }
-  else if (type == "tack") better descriptions ✔
+  else if (type == "tack") ; better descriptions ✔
   {
     if (mp1 == 5)
       out = GREAT BALLS OF FIRE!

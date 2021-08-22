@@ -17,7 +17,7 @@ Debug directly in Visual Studio Code using the AutoHotkey Plus extension
 
 ## How to
 
-Launch the watcher - monkey.ahk in parent directory
+Launch the main script - monkey.ahk in parent directory
 
 Scripts are started with the function keys:
 
