@@ -9,9 +9,9 @@ go()
   elapsed := (end - start)//1000
   mins := elapsed//60
   secs := mod(elapsed, 60)
-  dance()
+  wait()
   outputdebug, all done - took %mins% mins %secs% secs
-  end(5)
+  end()
   return
 }
 
@@ -29,8 +29,7 @@ F4:: ; speaker x / unused
 return
 
 F5:: ; stop / pause
-outputdebug, pausing
-pause, on
+pause()
 return
 
 F6:: ; back / home screen
@@ -68,5 +67,6 @@ mousegetpos, xpos, ypos
 pixelgetcolor, out, xpos, ypos
 outputdebug, cursor x: %xpos% y: %ypos%
 outputdebug, color: %out%
-outputdebug, %xpos%, %ypos%
+clipboard = %xpos%, %ypos%
+outputdebug, %clipboard% - copied to buffer, ready to paste!
 return
