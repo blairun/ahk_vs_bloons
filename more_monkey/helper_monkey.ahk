@@ -15,6 +15,12 @@ um()
   sleep, 150
 }
 
+pause()
+{
+  outputdebug, pausing
+  pause, on
+}
+
 move(x, y)
 {
   mousemove, %x%, %y%
@@ -35,17 +41,22 @@ died() ; question mark
   if (color() == 0x574853)
   {
     outputdebug, defeated
-    reload
+    pause()
   }
+}
+
+check()
+{
+    return (color() != 0xFFFFFF)
 }
 
 double_check()
 {
-  if (color() != 0xFFFFFF)
+  if check()
   {
     um()
     died()
-    if (color() != 0xFFFFFF)
+    if check()
     {
       um()
       died()
@@ -56,7 +67,7 @@ double_check()
   return 0
 }
 
-wait_um(c)
+wait_um(c) ; this wait should be -> c * um()
 {
   loop, %c%
   {
@@ -87,26 +98,47 @@ auto_ability()
   outputdebug, %out%
 }
 
-wait(s=0)
+continue()
+{
+  dance()
+  wait()
+  click([961, 908])
+  wait(1)
+  click([961, 908])
+  wait(1)
+  click([1121, 857])
+  wait(1)
+  click([1121, 857])
+}
+
+yes_paragon()
+{
+  click([1131, 724])
+}
+
+banana_pickup()
 {
   global bananas_pickup
+  l := bananas_pickup.maxindex()
   if (bananas_pickup[1])
   {
     i := 2
-    l := bananas_pickup.maxindex()
     while i < l
     {
       move(bananas_pickup[i], bananas_pickup[i + 1])
       i := i + 2
-      um()
     }
   }
+}
+
+wait(s=0) ; s isn't 1 second (just a PSA)
+{         ; gets longer as the b nay pickup points increase
   if (s == 0) ; wait round end
   {
     while double_check() == 0
     {
-      wait(1)
       auto_ability()
+      banana_pickup()
     }
   }
   else
@@ -115,7 +147,11 @@ wait(s=0)
       outputdebug, wait %s%
     loop, %s%
     {
-      sleep, 1000
+      loop, 2
+      {
+        sleep, 500
+        banana_pickup()
+      }
     }
   }
 }
@@ -139,12 +175,26 @@ drag(start, end)
   mouseclickdrag, left, start[1], start[2], end[1], end[2]
 }
 
-place(t, x, y, tower)
+place(t, x, y, tower, ups="")
 {
   outputdebug, placing %tower%
   key(t)
   click([x, y])
-  return [x, y, tower, [0,0,0]]
+  tower_info_array := [x, y, tower, [0,0,0]]
+  if (ups != "")
+  {
+    upgrade(tower_info_array, ups)
+  }
+  return tower_info_array
+}
+
+sell(who)
+{
+  tower := who[3]
+  outputdebug, selling %tower%
+  click(who)
+  send {backspace}
+  um()
 }
 
 hero(x, y)
@@ -166,6 +216,8 @@ info_hero(info, filename)
   splitpath, filename,,,, trim
   stringupper, all_caps, trim
   outputdebug, map and mode *%all_caps%*
+  if (info == none)
+    return
   info1 := info[1]
   info2 := info[2]
   outputdebug, select %info1% the %info2% hero
@@ -186,127 +238,134 @@ info_hero(info, filename)
   um()
 }
 
-dart(x, y)
+dart(x, y, upgrades="")
 {
-  return place("q", x, y, A_ThisFunc)
+  return place("q", x, y, A_ThisFunc, upgrades)
 }
 
-rang(x, y)
+rang(x, y, upgrades="")
 {
-  return place("w", x, y, A_ThisFunc)
+  return place("w", x, y, A_ThisFunc, upgrades)
 }
 
-bomb(x, y)
+bomb(x, y, upgrades="")
 {
-  return place("e", x, y, A_ThisFunc)
+  return place("e", x, y, A_ThisFunc, upgrades)
 }
 
-tack(x, y)
+tack(x, y, upgrades="")
 {
-  return place("r", x, y, A_ThisFunc)
+  return place("r", x, y, A_ThisFunc, upgrades)
 }
 
-ice(x, y)
+ice(x, y, upgrades="")
 {
-  return place("t", x, y, A_ThisFunc)
+  return place("t", x, y, A_ThisFunc, upgrades)
 }
 
-glue(x, y)
+glue(x, y, upgrades="")
 {
-  return place("y", x, y, A_ThisFunc)
+  return place("y", x, y, A_ThisFunc, upgrades)
 }
 
-sniper(x, y)
+sniper(x, y, upgrades="")
 {
-  return place("z", x, y, A_ThisFunc)
+  return place("z", x, y, A_ThisFunc, upgrades)
 }
 
-sub(x, y)
+sub(x, y, upgrades="")
 {
-  return place("x", x, y, A_ThisFunc)
+  return place("x", x, y, A_ThisFunc, upgrades)
 }
 
-ship(x, y)
+ship(x, y, upgrades="")
 {
-  return place("c", x, y, A_ThisFunc)
+  return place("c", x, y, A_ThisFunc, upgrades)
 }
 
-plane(x, y)
+plane(x, y, upgrades="")
 {
-  return place("v", x, y, A_ThisFunc)
+  return place("v", x, y, A_ThisFunc, upgrades)
 }
 
-heli(x, y)
+heli(x, y, upgrades="")
 {
-  return place("b", x, y, A_ThisFunc)
+  return place("b", x, y, A_ThisFunc, upgrades)
 }
 
-mortar(x, y)
+mortar(x, y, upgrades="")
 {
-  return place("n", x, y, A_ThisFunc)
+  return place("n", x, y, A_ThisFunc, upgrades)
 }
 
-dartling(x, y)
+dartling(x, y, upgrades="")
 {
-  return place("m", x, y, A_ThisFunc)
+  return place("m", x, y, A_ThisFunc, upgrades)
 }
 
-wizard(x, y)
+wizard(x, y, upgrades="")
 {
-  return place("a", x, y, A_ThisFunc)
+  return place("a", x, y, A_ThisFunc, upgrades)
 }
 
-super(x, y)
+super(x, y, upgrades="")
 {
-  return place("s", x, y, A_ThisFunc)
+  return place("s", x, y, A_ThisFunc, upgrades)
 }
 
-ninja(x, y)
+ninja(x, y, upgrades="")
 {
-  return place("d", x, y, A_ThisFunc)
+  return place("d", x, y, A_ThisFunc, upgrades)
 }
 
-alchemist(x, y)
+alchemist(x, y, upgrades="")
 {
-  return place("f", x, y, A_ThisFunc)
+  return place("f", x, y, A_ThisFunc, upgrades)
 }
 
-druid(x, y)
+druid(x, y, upgrades="")
 {
-  return place("g", x, y, A_ThisFunc)
+  return place("g", x, y, A_ThisFunc, upgrades)
 }
 
-farm(x, y)
+farm(x, y, upgrades="")
 {
-  return place("h", x, y, A_ThisFunc)
+  return place("h", x, y, A_ThisFunc, upgrades)
 }
 
-spike(x, y)
+spike(x, y, upgrades="")
 {
-  return place("j", x, y, A_ThisFunc)
+  return place("j", x, y, A_ThisFunc, upgrades)
 }
 
-village(x, y)
+village(x, y, upgrades="")
 {
-  return place("k", x, y, A_ThisFunc)
+  return place("k", x, y, A_ThisFunc, upgrades)
 }
 
-engineer(x, y)
+engineer(x, y, upgrades="")
 {
-  return place("l", x, y, A_ThisFunc)
+  return place("l", x, y, A_ThisFunc, upgrades)
 }
 
-targeting(who, c)
+targeting(who, c, optional="")
 {
-  outputdebug, cycling targeting by %c%
   x := who[1]
   y := who[2]
+  tower := who[3]
+  outputdebug, cycling %tower% targeting by %c%
   click([x, y])
   loop, %c%
   {
     send, {tab}
     um()
   }
+  if (optional == "lefty")
+    click([357, 284])
+  else if (optional == "righty")
+    click([89, 289])
+  if (optional != "")
+    outputdebug, switching %tower% to %optional%
   click([x, y])
 }
 
@@ -351,22 +410,27 @@ targeting_heli(a, tx, ty, right=1) ; menu open side
 
 upgrade(a, p)
 {
-  note := upgrade_description(a, p)
+  click(a)
+  loop, parse, p
+  {
+    if (A_LoopField == 1)
+    {
+      key(",")
+    }
+    else if (A_LoopField == 2)
+    {
+      key(".")
+    }
+    else
+    {
+      key("/")
+    }
+    note := upgrade_description(a, A_LoopField)
+    um()
+  }
   outputdebug, |     now %note%
-  click(a)
-  if (p == 1)
-  {
-    key(",")
-  }
-  else if (p == 2)
-  {
-    key(".")
-  }
-  else
-  {
-    key("/")
-  }
-  click(a)
+  send {esc}
+  um()
 }
 
 start()
@@ -409,7 +473,7 @@ play_round()
   wait(1)
 }
 
-dance(count=10)
+dance(count=3)
 {
   loop, %count%
   {
@@ -420,7 +484,7 @@ dance(count=10)
   }
 }
 
-end(count=10)
+end(count=3)
 {
   dance(count)
   outputdebug, |
@@ -462,7 +526,7 @@ to_mode(mode)
   click(mode[1])
   um()
   click(mode[2])
-  um()
+  wait(1)
   if (color(1088, 726) == 0x00E262) ; ok button
   {
     outputdebug, overwrite save
@@ -504,7 +568,7 @@ to_menu()
 {
   outputdebug, back to main menu
   send {esc}
-  um()
+  wait_um(2)
   click([845,847])
   um()
   reload

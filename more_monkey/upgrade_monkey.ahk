@@ -14,15 +14,15 @@ upgrade_description(monkey, path)
   else
     outputdebug, ERROR -%path%- is not matching with 1 2 or 3
   if (mp1 == 6 || mp2 == 6 || mp3 == 6)
-    out = PARAGON
-  else if (type == "dart")
+    out = PARAGON MUHAHAHA
+  else if (type == "dart") ; better descriptions ✔
   {
     if (mp1 == 5)
-      out = orange accent balls
+      out = big jugger
     else if (mp2 == 5)
-      out = triple plasma mask
+      out = little tiny plasma monkey
     else if (mp3 == 5)
-      out = black hood
+      out = crossbow professional
     else if (path == 1)
     {
       if (mp1 == 4)
@@ -57,66 +57,66 @@ upgrade_description(monkey, path)
         out = green arm bands
     }
   }
-  else if (type == "rang")
+  else if (type == "rang") ; better descriptions ✔
   {
     if (mp1 == 5)
-      out = purple hood
+      out = Lord, Accept Our True Devotion
     else if (mp2 == 5)
-      out = green accent on cap
+      out = "permanent super fast"
     else if (mp3 == 5)
-      out = fancy hair
+      out = on point hairdo cobber
     else if (path == 1)
     {
       if (mp1 == 4)
         out = gray hood
       else if (mp1 == 3)
-        out = purple bodysuit
+        out = purple suit
       else if (mp1 == 2)
-        out = red bodysuit
+        out = glaives
       else
-        out = red x on cap
+        out = x
     }
     else if (path == 2)
     {
       if (mp2 == 4)
-        out = yellow accent on bodysuit
+        out = dark bionic
       else if (mp2 == 3)
         out = bionic arm
       else if (mp2 == 2)
-        out = gray bodysuit with double red line on cap
+        out = gray suit double line
       else
-        out = red line on cap
+        out = line
     }
     else
     {
       if (mp3 == 4)
-        out = camo safari hat
+        out = green hat
       else if (mp3 == 3)
-        out = cream safari hat
+        out = safari hat
       else if (mp3 == 2)
-        out = orange bodysuit
+        out = red outlines
       else
-        out = red fingerless gloves
+        out = gloves
     }
   }
-  else if (type == "bomb")
+  else if (type == "bomb") ; better descriptions ✔
   {
     if (mp1 == 5)
-      out = red and spikey
+      out = seeing-red punch
     else if (mp2 == 5)
-      out = black and green
+      out = Moab Eliminator, 'nuff said
     else if (mp3 == 5)
-      out = green base black and yellow
+      out = large ... in charge
     else if (path == 1)
     {
       if (mp1 == 4)
-        out = black with green accents
+        out = black and green
       else if (mp1 == 3)
-        out = red with yellow ring
+        out = red and yellow
       else if (mp1 == 2)
-        out = double red ring
+        out = double ring
       else
-        out = red ring
+        out = ring
     }
     else if (path == 2)
     {
@@ -125,47 +125,47 @@ upgrade_description(monkey, path)
       else if (mp2 == 3)
         out = yellow
       else if (mp2 == 2)
-        out = red and grey missle
+        out = gray
       else
         out = red fins
     }
     else
     {
       if (mp3 == 4)
-        out = black base
+        out = bigger and bumpier
       else if (mp3 == 3)
-        out = green and yellow
+        out = yellow muzzle
       else if (mp3 == 2)
-        out = red explosion
+        out = explosion
       else
-        out = red target
+        out = target
     }
   }
-  else if (type == "tack")
+  else if (type == "tack") better descriptions ✔
   {
     if (mp1 == 5)
-      out = fire furnaces
+      out = GREAT BALLS OF FIRE!
     else if (mp2 == 5)
-      out = blue blade top
+      out = saw-y pointy spinny . . . YOUCH!!
     else if (mp3 == 5)
-      out = skull and crossbones
+      out = attack of the stack of tacks
     else if (path == 1)
     {
       if (mp1 == 4)
         out = open flame
       else if (mp1 == 3)
-        out = yellow with fire
+        out = yellow
       else if (mp1 == 2)
-        out = four tacks
+        out = four tacks (... or three blades?! SMH)
       else
-        out = three tacks
+        out = three tacks (or two blades... ?! okay... strange)
     }
     else if (path == 2)
     {
       if (mp2 == 4)
-        out = gray blade top
+        out = spinny point collar
       else if (mp2 == 3)
-        out = blades
+        out = sawzall
       else if (mp2 == 2)
         out = tall base
       else
@@ -176,11 +176,11 @@ upgrade_description(monkey, path)
       if (mp3 == 4)
         out = black
       else if (mp3 == 3)
-        out = red sixteen shooter
+        out = red
       else if (mp3 == 2)
-        out = twelve shooters
+        out = twelve
       else
-        out = ten shooters
+        out = ten
     }
   }
   else if (type == "ice")
@@ -813,46 +813,46 @@ upgrade_description(monkey, path)
         out = wood storage next to tree
     }
   }
-  else if (type == "spike")
+  else if (type == "spike") ; better descriptions ✔
   {
     if (mp1 == 5)
-      out = black and red skull spike balls
+      out = big-ass 'splosions
     else if (mp2 == 5)
-      out = quad purple rim fans
+      out = involuntary spike-ralph
     else if (mp3 == 5)
-      out = all yellow unit
+      out = only thing worse than Legos to step on in the middle of night
     else if (path == 1)
     {
       if (mp1 == 4)
-        out = skull spike balls
+        out = skull spikes
       else if (mp1 == 3)
-        out = gray with red spikes unit
+        out = spike balls
       else if (mp1 == 2)
-        out = red unit
+        out = hot spikes
       else
-        out = red top rim
+        out = redneck
     }
     else if (path == 2)
     {
       if (mp2 == 4)
-        out = purple and quad fan unit
+        out = swirly
       else if (mp2 == 3)
-        out = black base and purple unit
+        out = octogram mouth
       else if (mp2 == 2)
-        out = black unit with taller vents
+        out = tall vents
       else
-        out = purple feat with side vents
+        out = vents
     }
     else
     {
       if (mp3 == 4)
-        out = yellow accents with quad gears
+        out = quad gears
       else if (mp3 == 3)
-        out = blue unit with triple gears
+        out = triple gears
       else if (mp3 == 2)
         out = double gears
       else
-        out = blue bottom unit
+        out = blue accent
     }
   }
   else if (type == "village")
