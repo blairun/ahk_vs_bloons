@@ -1,11 +1,24 @@
 #include more_monkey/helper_monkey.ahk
 
+; ***************************
+; ***        notes        ***
+; ***************************
+; highest repeat map/mode cash reward
+
+; ***************************
+; ***        issues       ***
+; ***************************
+; NOT CONSISTENT
+;   63 loses sometimes
+;   95 loses sometimes
+;   mortar doesn't always upgrade
+
 infernal_impoppable() ; monkey knowledge maxed
 {
-  global always_ability := [false]
-  global bananas_pickup := [true, 1563, 579]
   info_hero(DRONE(), A_LineFile)
   prep(INFERNAL(), [HARD(), IMPOPPABLE()])
+  global always_ability := [false]
+  global bananas_pickup := [true, 1563, 579]
   low_dart := dart(1200, 794)
   low_sub := sub(472, 786)
   start()
