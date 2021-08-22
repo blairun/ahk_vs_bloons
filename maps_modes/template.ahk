@@ -1,12 +1,21 @@
 #include more_monkey/helper_monkey.ahk
 
-global always_ability := [<true/false>, <#>, <...>]
-global bananas_pickup := [<true/false>, <x1>, <y1>, <...>]
+; ***************************
+; ***        notes        ***
+; ***************************
+; <description and/or what makes this script unique?>
+
+; ***************************
+; ***        issues       ***
+; ***************************
+; <any problems are inconsistencies with the script?>
 
 <map>_<mode>() ; monkey knowledge <off/maxed>
 {
   info_hero(<hero>, A_LineFile)
   prep(<map>, [<difficulty>, <mode>])
+  global always_ability := [<true/false>, <#>, <...>]
+  global bananas_pickup := [<true/false>, <x1>, <y1>, <...>]
   start()
   ok(1)
   ok(2)
