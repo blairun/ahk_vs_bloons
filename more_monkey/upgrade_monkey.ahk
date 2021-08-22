@@ -2,948 +2,400 @@ upgrade_description(monkey, path)
 {
   ; monkey = [x, y, tower_type, [0,0,0]] 4 var/array is how upgraded it is
   type := monkey[3]
-  mp1 := monkey[4][1]
-  mp2 := monkey[4][2]
-  mp3 := monkey[4][3]
-  if (path == 1)
-    mp1++
-  else if (path == 2)
-    mp2++
-  else if (path == 3)
-    mp3++
-  else
-    outputdebug, ERROR -%path%- is not matching with 1 2 or 3
-  if (mp1 == 6 || mp2 == 6 || mp3 == 6)
-    out = PARAGON MUHAHAHA
-  else if (type == "dart") ; better descriptions ✔
+  path1_upgrades := monkey[4][1]
+  path2_upgrades := monkey[4][2]
+  path3_upgrades := monkey[4][3]
+
+  switch path
   {
-    if (mp1 == 5)
-      out = big jugger
-    else if (mp2 == 5)
-      out = little tiny plasma monkey
-    else if (mp3 == 5)
-      out = crossbow professional
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = yellow accent balls
-      else if (mp1 == 3)
-        out = black spike balls
-      else if (mp1 == 2)
-        out = red tail band
-      else
-        out = green tail band
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = blue do-rag
-      else if (mp2 == 3)
-        out = black do-rag
-      else if (mp2 == 2)
-        out = red headband
-      else
-        out = green headband
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = black crossbow
-      else if (mp3 == 3)
-        out = wood crossbow
-      else if (mp3 == 2)
-        out = red arm bands
-      else
-        out = green arm bands
-    }
+    case 1:
+      mp1++
+      pathX_upgrades := mp1
+    case 2:
+      mp2++
+      pathX_upgrades := mp2
+    case 3:
+      mp3++
+      pathX_upgrades := mp3
+    default: outputdebug, ERROR -%path%- is not matching with 1 2 or 3
   }
-  else if (type == "rang") ; better descriptions ✔
+
+  switch 5 ; is tower becoming or already tier 5?
   {
-    if (mp1 == 5)
-      out = Lord, Accept Our True Devotion
-    else if (mp2 == 5)
-      out = "permanent super fast"
-    else if (mp3 == 5)
-      out = on point hairdo cobber
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = gray hood
-      else if (mp1 == 3)
-        out = purple suit
-      else if (mp1 == 2)
-        out = glaives
-      else
-        out = x
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = dark bionic
-      else if (mp2 == 3)
-        out = bionic arm
-      else if (mp2 == 2)
-        out = gray suit double line
-      else
-        out = line
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = green hat
-      else if (mp3 == 3)
-        out = safari hat
-      else if (mp3 == 2)
-        out = red outlines
-      else
-        out = gloves
-    }
+    case mp1:
+      path = 1
+      pathX_upgrades = 5
+    case mp2:
+      path = 2
+      pathX_upgrades = 5
+    case mp3:
+      path = 3
+      pathX_upgrades = 5
+    default: path := path
   }
-  else if (type == "bomb") ; better descriptions ✔
+  upgrade = %type%%path%%pathX_upgrades%
+
+  switch upgrade
   {
-    if (mp1 == 5)
-      out = seeing-red punch
-    else if (mp2 == 5)
-      out = Moab Eliminator, 'nuff said
-    else if (mp3 == 5)
-      out = large ... in charge
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = black and green
-      else if (mp1 == 3)
-        out = red and yellow
-      else if (mp1 == 2)
-        out = double ring
-      else
-        out = ring
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = black and red
-      else if (mp2 == 3)
-        out = yellow
-      else if (mp2 == 2)
-        out = gray
-      else
-        out = red fins
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = bigger and bumpier
-      else if (mp3 == 3)
-        out = yellow muzzle
-      else if (mp3 == 2)
-        out = explosion
-      else
-        out = target
-    }
+    case RegExMatch(upgrade, ".*6.*"): out = PARAGON MUHAHAHA
+
+    case "dart11": out = green tail
+    case "dart12": out = red tail
+    case "dart13": out = spike balls
+    case "dart14": out = yellow accent balls
+    case "dart21": out = green headband
+    case "dart22": out = red headband
+    case "dart23": out = black do-rag
+    case "dart24": out = blue do-rag
+    case "dart31": out = green arm bands
+    case "dart32": out = red arm bands
+    case "dart33": out = wood crossbow
+    case "dart34": out = black crossbow
+    case "dart15": out = big jugger
+    case "dart25": out = little tiny plasma monkey
+    case "dart35": out = crossbow professional
+
+    case "rang11": out = x
+    case "rang12": out = glaives
+    case "rang13": out = purple suit
+    case "rang14": out = gray hood
+    case "rang21": out = line
+    case "rang22": out = gray suit double line
+    case "rang23": out = bionic arm
+    case "rang24": out = dark bionic
+    case "rang31": out = gloves
+    case "rang32": out = red outlines
+    case "rang33": out = safari hat
+    case "rang34": out = green hat
+    case "rang15": out = Lord, Accept Our True Devotion
+    case "rang25": out = "permanent super fast"
+    case "rang35": out = on point hairdo cobber
+
+    case "bomb11": out = ring
+    case "bomb12": out = double ring
+    case "bomb13": out = red and yellow
+    case "bomb14": out = black and green
+    case "bomb21": out = red fins
+    case "bomb22": out = gray
+    case "bomb23": out = yellow
+    case "bomb24": out = black and red
+    case "bomb31": out = target
+    case "bomb32": out = explosion
+    case "bomb33": out = yellow muzzle
+    case "bomb34": out = bigger and bumpier
+    case "bomb15": out = KO
+    case "bomb25": out = Moab Eliminator, 'nuff said
+    case "bomb35": out = large ... in charge
+
+    case "tack11": out = three tacks (or two blades... ?! okay... strange)
+    case "tack12": out = four tacks (... or three blades?! SMH)
+    case "tack13": out = yellow
+    case "tack14": out = open flame
+    case "tack21": out = flat top
+    case "tack22": out = tall base
+    case "tack23": out = sawzall
+    case "tack24": out = spinny point collar
+    case "tack31": out = ten
+    case "tack32": out = twelve
+    case "tack33": out = red
+    case "tack34": out = black
+    case "tack15": out = GREAT BALLS OF FIRE!
+    case "tack25": out = saw-y pointy spinny . . . YOUCH!!
+    case "tack35": out = attack of the stack of tacks
+
+    case "ice11": out =  snowflake head
+    case "ice12": out =  snowflake headband
+    case "ice13": out =  diamond headband
+    case "ice14": out =  warm blooded
+    case "ice21": out =  earmuffs
+    case "ice22": out =  hat
+    case "ice23": out =  coat
+    case "ice24": out =  eyes closed
+    case "ice31": out =  gloves
+    case "ice32": out =  shades
+    case "ice33": out =  ice cannon
+    case "ice34": out =  ice armor
+    case "ice15": out =  purple blooded?!
+    case "ice25": out =  ice mask, the frozen nightmare
+    case "ice35": out =  jumbo icicle rocket launcher
+
+    case "glue11": out = little hat, probs staying on with glue
+    case "glue12": out = purple
+    case "glue13": out = blue suit
+    case "glue14": out = dark blue suit
+    case "glue21": out = orange tank cap
+    case "glue22": out = orange
+    case "glue23": out = yellow suit
+    case "glue24": out = double tank
+    case "glue31": out = glue splatter
+    case "glue32": out = pink
+    case "glue33": out = white suit
+    case "glue34": out = gray suit
+    case "glue15": out = gooey green
+    case "glue25": out = medusa + glue gunner = this
+    case "glue35": out = Wait. All the other glues weren't super?
+
+    case "sniper11": out = red
+    case "sniper12": out = purple
+    case "sniper13": out = black hat
+    case "sniper14": out = leafy hat
+    case "sniper21": out = night vision
+    case "sniper22": out = explosion
+    case "sniper23": out = camo hat
+    case "sniper24": out = little radio antenna
+    case "sniper31": out = gray
+    case "sniper32": out = orange
+    case "sniper33": out = ppe
+    case "sniper34": out = ppe 2.0 - combat helmet
+    case "sniper15": out = full bush [o_o] hehe
+    case "sniper25": out = spider eyes
+    case "sniper35": out = ppe 3.0 - gas mask!
+
+    case "sub11": out = green hat
+    case "sub12": out = green fins and binoculars
+    case "sub13": out = submerged with glass nose
+    case "sub14": out = black with green atomic nose
+    case "sub21": out = red accent on bow
+    case "sub22": out = red nose
+    case "sub23": out = red fins and missles
+    case "sub24": out = red belly with black top
+    case "sub31": out = double shooter
+    case "sub32": out = yellow rear
+    case "sub33": out = triple guns
+    case "sub34": out = pointed nose
+    case "sub15": out = black electricity
+    case "sub25": out = red sub and monkey below deck
+    case "sub35": out = yellow accents
+
+    case "ship11": out = pirate flag
+    case "ship12": out = gray boat
+    case "ship13": out = triple cannon
+    case "ship14": out = aircraft carrier
+    case "ship21": out = grapes on board
+    case "ship22": out = fire grapes
+    case "ship23": out = sail and pirate hook
+    case "ship24": out = double skull gray sails
+    case "ship31": out = yellow cannon ring
+    case "ship32": out = lookout nest
+    case "ship33": out = orange turbin
+    case "ship34": out = red ship
+    case "ship15": out = dark gray with double platforms
+    case "ship25": out = gray with green purple red accents
+    case "ship35": out = shipping containers
+
+    case "plane11": out = double red stripe
+    case "plane12": out = gray nose and fins
+    case "plane13": out = full gray body
+    case "plane14": out = bomber shape
+    case "plane21": out = yellow rings
+    case "plane22": out = dark helmet goggles on
+    case "plane23": out = twin propellar
+    case "plane24": out = gray with black wing tips and green tail
+    case "plane31": out = red wing tips
+    case "plane32": out = all red
+    case "plane33": out = black wings with jet engines
+    case "plane34": out = all black quad propellar
+    case "plane15": out = double black tail fins
+    case "plane25": out = all gray quad propellar
+    case "plane35": out = huge black with six propellars
+
+    case "heli11": out = quad shooter
+    case "heli12": out = gray body
+    case "heli13": out = razor blades
+    case "heli14": out = machine gun nose
+    case "heli21": out = yellow tail fins
+    case "heli22": out = blue helmet with goggles on
+    case "heli23": out = blue accents
+    case "heli24": out = double blade
+    case "heli31": out = yellow arrow wing accents
+    case "heli32": out = gray with green wing accents
+    case "heli33": out = double green wing accents
+    case "heli34": out = gray camo body
+    case "heli15": out = plasma gunners
+    case "heli25": out = dark gray sniper drop ability
+    case "heli35": out = brown camo
+
+    case "mortar11": out = cannon yellow rim
+    case "mortar12": out = white cannon
+    case "mortar13": out = goggles on
+    case "mortar14": out = yellow with yellow gray bodysuit
+    case "mortar21": out = yellow handle
+    case "mortar22": out = gray base
+    case "mortar23": out = gray cannon
+    case "mortar24": out = triple cannon
+    case "mortar31": out = headset
+    case "mortar32": out = red helmet
+    case "mortar33": out = cannon red rim
+    case "mortar34": out = red fire cannon
+    case "mortar15": out = gray with green accents
+    case "mortar25": out = white hat with straight three cannons
+    case "mortar35": out = yellow accents with yellow goggles
+
+    case "dartling11": out = red dot
+    case "dartling12": out = ensigna
+    case "dartling13": out = red helmet
+    case "dartling14": out = yellow beam
+    case "dartling21": out = triangle
+    case "dartling22": out = green triangle
+    case "dartling23": out = purple helmet
+    case "dartling24": out = black helmet
+    case "dartling31": out = stabilizers
+    case "dartling32": out = lines
+    case "dartling33": out = blue helmet
+    case "dartling34": out = double double
+    case "dartling15": out = throne
+    case "dartling25": out = bigger is better
+    case "dartling35": out = straight six
+
+    case "wizard11": out = blue
+    case "wizard12": out = moon and brim
+    case "wizard13": out = blue wand
+    case "wizard14": out = purple cape
+    case "wizard21": out = red
+    case "wizard22": out = firewall
+    case "wizard23": out = fire wand
+    case "wizard24": out = wings
+    case "wizard31": out = purple
+    case "wizard32": out = jewel
+    case "wizard33": out = hooded
+    case "wizard34": out = skulls
+    case "wizard15": out = Rhesus Proboscis Wooly Baboon Dumbledore
+    case "wizard25": out = perma-phoenix
+    case "wizard35": out = grim reaper
+
+    case "super11": out = red laser visor
+    case "super12": out = plasma triple mask
+    case "super13": out = yellow sun bodysuit
+    case "super14": out = yellow temple
+    case "super21": out = cape and wrist gold accents
+    case "super22": out = gray wrists with gray head gear
+    case "super23": out = gray bodysuit double shooter
+    case "super24": out = red eyes with green accents
+    case "super31": out = yellow line cap
+    case "super32": out = double yellow line with hero mask
+    case "super33": out = dark bodysuit and cape
+    case "super34": out = black helmet
+    case "super15": out = sun god
+    case "super25": out = red accents
+    case "super35": out = full coverage suit
+
+    case "ninja11": out = white headband
+    case "ninja12": out = red headband
+    case "ninja13": out = hood
+    case "ninja14": out = rice hat
+    case "ninja21": out = black ninja star
+    case "ninja22": out = green ninja star
+    case "ninja23": out = secret scroll
+    case "ninja24": out = four-eyes
+    case "ninja31": out = blue ninja star
+    case "ninja32": out = silver ninja star
+    case "ninja33": out = masquerade
+    case "ninja34": out = full red mask
+    case "ninja15": out = grand master
+    case "ninja25": out = one-eyed wonder
+    case "ninja35": out = operation intimidation
+
+    case "alchemist11": out = backpack
+    case "alchemist12": out = green potion
+    case "alchemist13": out = barrel pack
+    case "alchemist14": out = double barrel
+    case "alchemist21": out = white gloves
+    case "alchemist22": out = gas mask
+    case "alchemist23": out = goggles on
+    case "alchemist24": out = mad scientest
+    case "alchemist31": out = visor goggles
+    case "alchemist32": out = purple visor
+    case "alchemist33": out = dark gray
+    case "alchemist34": out = black and gold
+    case "alchemist15": out = merry mountain man
+    case "alchemist25": out = bad influence
+    case "alchemist35": out = the future is bright
+
+    case "druid11": out = walking stick
+    case "druid12": out = enhanced walking stick
+    case "druid13": out = hood
+    case "druid14": out = eyeless
+    case "druid21": out = thorn wrist bands
+    case "druid22": out = thorn shield
+    case "druid23": out = leafy tiara
+    case "druid24": out = leaf crown
+    case "druid31": out = green diamond
+    case "druid32": out = read diamond
+    case "druid33": out = black getup
+    case "druid34": out = a little possessed
+    case "druid15": out = cloud nine
+    case "druid25": out = Grandmother Willow
+    case "druid35": out = full freakin' demon
+
+    case "farm11": out = gray rock border
+    case "farm12": out = gold rock border
+    case "farm13": out = four trees
+    case "farm14": out = gray factory
+    case "farm21": out = green bananas with wood fence
+    case "farm22": out = gold fence
+    case "farm23": out = wooden bank
+    case "farm24": out = light blue bank
+    case "farm31": out = wood storage next to tree
+    case "farm32": out = banana storage
+    case "farm33": out = red tent shop
+    case "farm34": out = red roof gray shop
+    case "farm15": out = dome glass top
+    case "farm25": out = gray and yellow bank
+    case "farm35": out = white pillar building
+
+    case "spike11": out = redneck
+    case "spike12": out = hot spikes
+    case "spike13": out = spike balls
+    case "spike14": out = skull spikes
+    case "spike21": out = vents
+    case "spike22": out = tall vents
+    case "spike23": out = octogram mouth
+    case "spike24": out = swirly
+    case "spike31": out = blue accent
+    case "spike32": out = double gears
+    case "spike33": out = triple gears
+    case "spike34": out = quad gears
+    case "spike15": out = big-ass 'splosions
+    case "spike25": out = involuntary spike-ralph
+    case "spike35": out = only thing worse than Legos to step on in the middle of night
+
+    case "village11": out = red doorway and scrunchie
+    case "village12": out = drums outside
+    case "village13": out = wood cabin with red flag
+    case "village14": out = wood fort with red target
+    case "village21": out = satelite
+    case "village22": out = double satelite
+    case "village23": out = light blue tower
+    case "village24": out = dark gray tower
+    case "village31": out = wood crates outside
+    case "village32": out = banana sign
+    case "village33": out = triple hut
+    case "village34": out = clock tower cabin
+    case "village15": out = gray castle with projectile
+    case "village25": out = huge white satelite
+    case "village35": out = cabin villages and windmill
+
+    case "engineer11": out = green nailer
+    case "engineer12": out = green chevron
+    case "engineer13": out = double chevron
+    case "engineer14": out = goggles
+    case "engineer21": out = pencil ready
+    case "engineer22": out = white pencil
+    case "engineer23": out = bubbles
+    case "engineer24": out = blue-ish gun
+    case "engineer31": out = gray
+    case "engineer32": out = work gloves
+    case "engineer33": out = double troble
+    case "engineer34": out = trap
+    case "engineer15": out = exploding construction equipment
+    case "engineer25": out = computer aided cleaning
+    case "engineer35": out = black [hole] box
+
+    default: out = ERROR
   }
-  else if (type == "tack") ; better descriptions ✔
-  {
-    if (mp1 == 5)
-      out = GREAT BALLS OF FIRE!
-    else if (mp2 == 5)
-      out = saw-y pointy spinny . . . YOUCH!!
-    else if (mp3 == 5)
-      out = attack of the stack of tacks
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = open flame
-      else if (mp1 == 3)
-        out = yellow
-      else if (mp1 == 2)
-        out = four tacks (... or three blades?! SMH)
-      else
-        out = three tacks (or two blades... ?! okay... strange)
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = spinny point collar
-      else if (mp2 == 3)
-        out = sawzall
-      else if (mp2 == 2)
-        out = tall base
-      else
-        out = flat top
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = black
-      else if (mp3 == 3)
-        out = red
-      else if (mp3 == 2)
-        out = twelve
-      else
-        out = ten
-    }
-  }
-  else if (type == "ice")
-  {
-    if (mp1 == 5)
-      out = diamond crest with purple body
-    else if (mp2 == 5)
-      out = blue body and with blue body
-    else if (mp3 == 5)
-      out = ice shoes and jumbo ice cannon
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = gray lightning headband with red body
-      else if (mp1 == 3)
-        out = gray diamond headband
-      else if (mp1 == 2)
-        out = gray snowflake headband
-      else
-        out = snowflake forehead
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = white coat and blue scarf
-      else if (mp2 == 3)
-        out = brown coat and red scarf
-      else if (mp2 == 2)
-        out = red hat
-      else
-        out = earmuffs
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = ice armor
-      else if (mp3 == 3)
-        out = ice cannon with gray earmuffs
-      else if (mp3 == 2)
-        out = blue shades
-      else
-        out = gray gloves
-    }
-  }
-  else if (type == "glue")
-  {
-    if (mp1 == 5)
-      out = green bodysuit
-    else if (mp2 == 5)
-      out = orange bodysuit with spider tank
-    else if (mp3 == 5)
-      out = black suit with red twist tank cap
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = dark blue bodysuit with quadruple glue cannisters
-      else if (mp1 == 3)
-        out = blue bodysuit with gas mask and green glue
-      else if (mp1 == 2)
-        out = purple bodysuit
-      else
-        out = gray hat
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = huge tank
-      else if (mp2 == 3)
-        out = yellow bodysuit with big nozzle
-      else if (mp2 == 2)
-        out = orange bodysuit
-      else
-        out = orange nozzle with black tank
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = gray bodysuit with overfilled shooters and tank
-      else if (mp3 == 3)
-        out = white bodysuit with pink glue and double nozzle
-      else if (mp3 == 2)
-        out = pink bodysuit
-      else
-        out = glue splatter on head
-    }
-  }
-  else if (type == "sniper")
-  {
-    if (mp1 == 5)
-      out = full bush camouflage
-    else if (mp2 == 5)
-      out = spider eyes camo helmet
-    else if (mp3 == 5)
-      out = long sleeves and pants with gas mask
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = leaves camouflage
-      else if (mp1 == 3)
-        out = black hat with red accent gun
-      else if (mp1 == 2)
-        out = purple hat with gray vest
-      else
-        out = red hat
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = radio with red antenna ball
-      else if (mp2 == 3)
-        out = full camo gear
-      else if (mp2 == 2)
-        out = explosion decal
-      else
-        out = blue hat with night vision goggles
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = black helmet
-      else if (mp3 == 3)
-        out = headphones
-      else if (mp3 == 2)
-        out = orange hat
-      else
-        out = gray hat
-    }
-  }
-  else if (type == "sub")
-  {
-    if (mp1 == 5)
-      out = black electricity
-    else if (mp2 == 5)
-      out = red sub and monkey below deck
-    if (mp3 == 5)
-      out = yellow accents
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = black with green atomic nose
-      else if (mp1 == 3)
-        out = submerged with glass nose
-      else if (mp1 == 2)
-        out = green fins and binoculars
-      else
-        out = green hat
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = red belly with black top
-      else if (mp2 == 3)
-        out = red fins and missles
-      else if (mp2 == 2)
-        out = red nose
-      else
-        out = red accent on bow
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = pointed nose
-      else if (mp3 == 3)
-        out = triple guns
-      else if (mp3 == 2)
-        out = yellow rear
-      else
-        out = double shooter
-    }
-  }
-  else if (type == "ship")
-  {
-    if (mp1 == 5)
-      out = dark gray with double platforms
-    else if (mp2 == 5)
-      out = gray with green purple red accents
-    else if (mp3 == 5)
-      out = shipping containers
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = aircraft carrier
-      else if (mp1 == 3)
-        out = triple cannon
-      else if (mp1 == 2)
-        out = gray boat
-      else
-        out = pirate flag
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = double skull gray sails
-      else if (mp2 == 3)
-        out = sail and pirate hook
-      else if (mp2 == 2)
-        out = fire grapes
-      else
-        out = grapes on board
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = red ship
-      else if (mp3 == 3)
-        out = orange turbin
-      else if (mp3 == 2)
-        out = lookout nest
-      else
-        out = yellow cannon ring
-    }
-  }
-  else if (type == "plane")
-  {
-    if (mp1 == 5)
-      out = double black tail fins
-    else if (mp2 == 5)
-      out = all gray quad propellar
-    else if (mp3 == 5)
-      out = huge black with six propellars
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = bomber shape
-      else if (mp1 == 3)
-        out = full gray body
-      else if (mp1 == 2)
-        out = gray nose and fins
-      else
-        out = double red stripe
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = gray with black wing tips and green tail
-      else if (mp2 == 3)
-        out = twin propellar
-      else if (mp2 == 2)
-        out = dark helmet goggles on
-      else
-        out = yellow rings
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = all black quad propellar
-      else if (mp3 == 3)
-        out = black wings with jet engines
-      else if (mp3 == 2)
-        out = all red
-      else
-        out = red wing tips
-    }
-  }
-  else if (type == "heli")
-  {
-    if (mp1 == 5)
-      out = plasma gunners
-    else if (mp2 == 5)
-      out = dark gray sniper drop ability
-    else if (mp3 == 5)
-      out = brown camo
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = machine gun nose
-      else if (mp1 == 3)
-        out = razor blades
-      else if (mp1 == 2)
-        out = gray body
-      else
-        out = quad shooter
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = double blade
-      else if (mp2 == 3)
-        out = blue accents
-      else if (mp2 == 2)
-        out = blue helmet with goggles on
-      else
-        out = yellow tail fins
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = gray camo body
-      else if (mp3 == 3)
-        out = double green wing accents
-      else if (mp3 == 2)
-        out = gray with green wing accents
-      else
-        out = yellow arrow wing accents
-    }
-  }
-  else if (type == "mortar")
-  {
-    if (mp1 == 5)
-      out = gray with green accents
-    else if (mp2 == 5)
-      out = white hat with straight three cannons
-    else if (mp3 == 5)
-      out = yellow accents with yellow goggles
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = yellow with yellow gray bodysuit
-      else if (mp1 == 3)
-        out = goggles on
-      else if (mp1 == 2)
-        out = white cannon
-      else
-        out = cannon yellow rim
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = triple cannon
-      else if (mp2 == 3)
-        out = gray cannon
-      else if (mp2 == 2)
-        out = gray base
-      else
-        out = yellow handle
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = red fire cannon
-      else if (mp3 == 3)
-        out = cannon red rim
-      else if (mp3 == 2)
-        out = red helmet
-      else
-        out = headset
-    }
-  }
-  else if (type == "dartling")
-  {
-    if (mp1 == 5)
-      out = red throne cannon
-    else if (mp2 == 5)
-      out = left and right huge cannons
-    else if (mp3 == 5)
-      out = six barrel huge ride along
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = red bodysuit with yellow cannon
-      else if (mp1 == 3)
-        out = red helmet with yellow visor
-      else if (mp1 == 2)
-        out = black barrels
-      else
-        out = red dot
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = black bodysuit with green accents
-      else if (mp2 == 3)
-        out = purple helmet with rocket launcher
-      else if (mp2 == 2)
-        out = green barrels and gloves
-      else
-        out = purple cannon
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = four barrel ride along
-      else if (mp3 == 3)
-        out = blue helmet
-      else if (mp3 == 2)
-        out = single triple barrel with yellow helmet accents
-      else
-        out = stabilize legs
-    }
-  }
-  else if (type == "wizard")
-  {
-    if (mp1 == 5)
-      out = all white with moon wand
-    else if (mp2 == 5)
-      out = perma phoenix with wizard wings
-    else if (mp3 == 5)
-      out = dark skull throne
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = purple cape
-      else if (mp1 == 3)
-        out = blue ball wand
-      else if (mp1 == 2)
-        out = blue wide brim hat
-      else
-        out = blue hat
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = red phoenix hat with red wand
-      else if (mp2 == 3)
-        out = red outfit with fire ball wand
-      else if (mp2 == 2)
-        out = red wide brim hat with red gloves
-      else
-        out = black and red hat
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = green accent skull wand
-      else if (mp3 == 3)
-        out = purple accent hooded cloak
-      else if (mp3 == 2)
-        out = wide brim hat with glasses
-      else
-        out = big  ball magic
-    }
-  }
-  else if (type == "super")
-  {
-    if (mp1 == 5)
-      out = sun god
-    else if (mp2 == 5)
-      out = red accents
-    else if (mp3 == 5)
-      out = full coverage suit
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = yellow temple
-      else if (mp1 == 3)
-        out = yellow sun bodysuit
-      else if (mp1 == 2)
-        out = plasma triple mask
-      else
-        out = red laser visor
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = red eyes with green accents
-      else if (mp2 == 3)
-        out = gray bodysuit double shooter
-      else if (mp2 == 2)
-        out = gray wrists with gray head gear
-      else
-        out = cape and wrist gold accents
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = black helmet
-      else if (mp3 == 3)
-        out = dark bodysuit and cape
-      else if (mp3 == 2)
-        out = double yellow line with hero mask
-      else
-        out = yellow line cap
-    }
-  }
-  else if (type == "ninja")
-  {
-    if (mp1 == 5)
-      out = black rice hat
-    else if (mp2 == 5)
-      out = huge black pack
-    else if (mp3 == 5)
-      out = black mask with red horns
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = rice hat
-      else if (mp1 == 3)
-        out = white suit and hood
-      else if (mp1 == 2)
-        out = black bodysuit with red bands
-      else
-        out = headband
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = black suit spider mask
-      else if (mp2 == 3)
-        out = green hood suit with pack
-      else if (mp2 == 2)
-        out = black bodysuit with green accent
-      else
-        out = black ninja star symbol
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = full red mask
-      else if (mp3 == 3)
-        out = monster mask with red eyebrows
-      else if (mp3 == 2)
-        out = black bodysuit white star plaque
-      else
-        out = blue ninja star head plaque
-    }
-  }
-  else if (type == "alchemist")
-  {
-    if (mp1 == 5)
-      out = bearded and spikey hair
-    else if (mp2 == 5)
-      out = blue fur and pink body
-    else if (mp3 == 5)
-      out = jewel accents with red cape
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = helmet and double barrels
-      else if (mp1 == 3)
-        out = orange jacket and goggles
-      else if (mp1 == 2)
-        out = green potion
-      else
-        out = backpack
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = beard and spikey hair and goggles off
-      else if (mp2 == 3)
-        out = white coat with goggles on
-      else if (mp2 == 2)
-        out = black gloves and mask
-      else
-        out = white gloves
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = wide brim hat
-      else if (mp3 == 3)
-        out = gray and gold outfit
-      else if (mp3 == 2)
-        out = blue visor goggles
-      else
-        out = visor goggles
-    }
-  }
-  else if (type == "druid")
-  {
-    if (mp1 == 5)
-      out = white hood cloak on a cloud
-    else if (mp2 == 5)
-      out = green with light eyes
-    else if (mp3 == 5)
-      out = red body and crazy eyes
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = blue cloak with light eyes
-      else if (mp1 == 3)
-        out = light blue hood cloak
-      else if (mp1 == 2)
-        out = blue band with green cape and
-      else
-        out = walking stick
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = stump seat with big leaf headband
-      else if (mp2 == 3)
-        out = green gown with leaf headband
-      else if (mp2 == 2)
-        out = thorn shield
-      else
-        out = thorn wrist bands
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = wolf cap
-      else if (mp3 == 3)
-        out = dark feather cape and cap
-      else if (mp3 == 2)
-        out = read forehead diamond and band
-      else
-        out = green forehead diamond
-    }
-  }
-  else if (type == "farm")
-  {
-    if (mp1 == 5)
-      out = dome glass top
-    else if (mp2 == 5)
-      out = gray and yellow bank
-    else if (mp3 == 5)
-      out = white pillar building
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = gray factory
-      else if (mp1 == 3)
-        out = four trees
-      else if (mp1 == 2)
-        out = gold rock border
-      else
-        out = gray rock border
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = light blue bank
-      else if (mp2 == 3)
-        out = wooden bank
-      else if (mp2 == 2)
-        out = gold fence
-      else
-        out = green bananas with wood fence
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = red roof gray shop
-      else if (mp3 == 3)
-        out = red tent shop
-      else if (mp3 == 2)
-        out = banana storage
-      else
-        out = wood storage next to tree
-    }
-  }
-  else if (type == "spike") ; better descriptions ✔
-  {
-    if (mp1 == 5)
-      out = big-ass 'splosions
-    else if (mp2 == 5)
-      out = involuntary spike-ralph
-    else if (mp3 == 5)
-      out = only thing worse than Legos to step on in the middle of night
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = skull spikes
-      else if (mp1 == 3)
-        out = spike balls
-      else if (mp1 == 2)
-        out = hot spikes
-      else
-        out = redneck
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = swirly
-      else if (mp2 == 3)
-        out = octogram mouth
-      else if (mp2 == 2)
-        out = tall vents
-      else
-        out = vents
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = quad gears
-      else if (mp3 == 3)
-        out = triple gears
-      else if (mp3 == 2)
-        out = double gears
-      else
-        out = blue accent
-    }
-  }
-  else if (type == "village")
-  {
-    if (mp1 == 5)
-      out = gray castle with projectile
-    else if (mp2 == 5)
-      out = huge white satelite
-    else if (mp3 == 5)
-      out = cabin villages and windmill
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = wood fort with red target
-      else if (mp1 == 3)
-        out = wood cabin with red flag
-      else if (mp1 == 2)
-        out = drums outside
-      else
-        out = red doorway and scrunchie
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = dark gray tower
-      else if (mp2 == 3)
-        out = light blue tower
-      else if (mp2 == 2)
-        out = double satelite
-      else
-        out = satelite
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = clock tower cabin
-      else if (mp3 == 3)
-        out = triple hut
-      else if (mp3 == 2)
-        out = banana sign
-      else
-        out = wood crates outside
-    }
-  }
-  else if (type == "engineer")
-  {
-    if (mp1 == 5)
-      out = purple visor with purple sentrys
-    else if (mp2 == 5)
-      out = shades with grey circuit helmet
-    else if (mp3 == 5)
-      out = yellow hat with huge trap
-    else if (path == 1)
-    {
-      if (mp1 == 4)
-        out = green visor with colored sentrys
-      else if (mp1 == 3)
-        out = black helmet with green accents
-      else if (mp1 == 2)
-        out = green arrow on helmet with red band wrench
-      else
-        out = green drill and sentrys
-    }
-    else if (path == 2)
-    {
-      if (mp2 == 4)
-        out = white helmet and coat with blue accents
-      else if (mp2 == 3)
-        out = white helmet with blue pack
-      else if (mp2 == 2)
-        out = red helmet with yellow jacket
-      else
-        out = orange helmet
-    }
-    else
-    {
-      if (mp3 == 4)
-        out = blue yellow hat with trap
-      else if (mp3 == 3)
-        out = yellow glasses with double guns
-      else if (mp3 == 2)
-        out = black hat with gloves
-      else
-        out = black gray hat
-    }
-  }
-  else
-    out = ERROR
 
   monkey[4] := [mp1, mp2, mp3]
   outputdebug, upgrading %type%  \\\  %mp1% %mp2% %mp3%
-  to_return = %type%  ///  %out%
-  return to_return
+  return_string = %type%  ///  %out%
+  return return_string
 }
