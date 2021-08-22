@@ -1,5 +1,15 @@
 #include more_monkey/helper_monkey.ahk
 
+; ***************************
+; ***        notes        ***
+; ***************************
+; e z p z
+
+; ***************************
+; ***        issues       ***
+; ***************************
+; n/a
+
 monkey_meadow_easy() ; monkey knowledge maxed
 {
   global always_ability := [true, 1]
