@@ -8,7 +8,8 @@
 ; ***************************
 ; ***        issues       ***
 ; ***************************
-; n/a
+; place all monkeys of a type, for writing better descriptions
+; find and replace - current tower: tack
 
 ouch_sandbox() ; monkey knowledge <off/maxed>
 {
