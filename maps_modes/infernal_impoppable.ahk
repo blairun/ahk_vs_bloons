@@ -8,16 +8,12 @@
 ; ***************************
 ; ***        issues       ***
 ; ***************************
-; NOT CONSISTENT
-;   63 loses sometimes
-;   95 loses sometimes
-;   mortar doesn't always upgrade
+; n/a
 
 infernal_impoppable() ; monkey knowledge maxed
 {
   info_hero(DRONE(), A_LineFile)
   prep(INFERNAL(), [HARD(), IMPOPPABLE()])
-  global always_ability := [false]
   global bananas_pickup := [true, 1563, 579]
   low_dart := dart(1200, 794)
   low_sub := sub(472, 786)
@@ -31,15 +27,13 @@ infernal_impoppable() ; monkey knowledge maxed
   ok(11)
   hero(836, 380)
   ok(12)
-  upgrade(high_dart, 3)
-  upgrade(high_dart, 2)
+  upgrade(high_dart, 32)
   ok(13)
   upgrade(high_dart, 3)
   ok(14)
   upgrade(high_dart, 2)
   ok(15)
-  upgrade(low_dart, 3)
-  upgrade(low_dart, 3)
+  upgrade(low_dart, 33)
   ok(16)
   ok(17)
   upgrade(high_dart, 2)
@@ -93,11 +87,7 @@ infernal_impoppable() ; monkey knowledge maxed
   ok(45)
   wizard := wizard(835, 698)
   ok(46)
-  upgrade(wizard, 3)
-  upgrade(wizard, 3)
-  upgrade(wizard, 1)
-  upgrade(wizard, 1)
-  upgrade(wizard, 1)
+  upgrade(wizard, 33111)
   ok(47)
   ok(48)
   ok(49)
@@ -109,18 +99,10 @@ infernal_impoppable() ; monkey knowledge maxed
   ok(55)
   upgrade(farm, 1)
   ok(56)
-  l_sub_2 := sub(423, 845)
-  upgrade(l_sub_2, 1)
-  upgrade(l_sub_2, 1)
-  l_sub_3 := sub(504, 851)
-  upgrade(l_sub_3, 1)
-  upgrade(l_sub_3, 1)
-  h_sub_2 := sub(1154, 213)
-  upgrade(h_sub_2, 1)
-  upgrade(h_sub_2, 1)
-  h_sub_3 := sub(1235, 207)
-  upgrade(h_sub_3, 1)
-  upgrade(h_sub_3, 1)
+  l_sub_2 := sub(423, 845, 11)
+  l_sub_3 := sub(504, 851, 11)
+  h_sub_2 := sub(1154, 213, 11)
+  h_sub_3 := sub(1235, 207, 11)
   ok(57)
   upgrade(h_sub_2, 3)
   upgrade(h_sub_3, 3)
@@ -146,11 +128,7 @@ infernal_impoppable() ; monkey knowledge maxed
   ok(64)
   mortar := mortar(1207, 876)
   targeting_mortar(mortar, 658, 531)
-  upgrade(mortar, 2)
-  upgrade(mortar, 2)
-  upgrade(mortar, 3)
-  upgrade(mortar, 3)
-  upgrade(mortar, 3)
+  upgrade(mortar, 22333)
   ok(65)
   ok(66)
   ok(67)
@@ -194,14 +172,6 @@ infernal_impoppable() ; monkey knowledge maxed
   ok(95) ; ds and moabs rush
   wait(10)
   ability(2)
-  wait(2)
-  ability(3)
-  wait(2)
-  ability(3)
-  wait(2)
-  ability(1)
-  wait(2)
-  ability(3)
   wait(2)
   ability(3)
   wait(2)

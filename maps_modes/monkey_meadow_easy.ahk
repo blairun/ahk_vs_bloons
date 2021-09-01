@@ -13,7 +13,6 @@
 monkey_meadow_easy() ; monkey knowledge maxed
 {
   global always_ability := [true, 1]
-  global bananas_pickup := [false]
   info_hero(QUINC(), A_LineFile)
   prep(MONKEY_MEADOW(), [EASY(), STANDARD()])
   start()

@@ -3,22 +3,19 @@
 ; ***        notes        ***
 ; ***************************
 ; place all monkeys of a type, for writing better descriptions
-; find and replace - current tower: tack
+; find and replace - current tower: dart
 
 ; ***************************
 ; ***        issues       ***
 ; ***************************
-; place all monkeys of a type, for writing better descriptions
-; find and replace - current tower: tack
+; following towers are too big (or water) for this map/setup:
+; sub, ship, plane, heli, mortar, super, farm, village
 
-ouch_sandbox() ; monkey knowledge <off/maxed>
+ouch_sandbox()
 {
-  info_hero(none, A_LineFile)
   prep(OUCH(), [EASY(), SANDBOX()])
-  global always_ability := [false]
-  global bananas_pickup := [false]
-  click([846, 553])
-  click([953, 630])
+  click([846, 553]) ; get rid of the
+  click([953, 630]) ; middle water
   one_paths()
   mixed_top()
   mixed_mid()
@@ -54,13 +51,13 @@ place_batch(startx, starty, offsetx, offsety
     x := startx
     start_string := start_strings[A_Index]
     add_string := add_strings[A_Index]
-    tack := tack(x, y, start_string)
+    dart := dart(x, y, start_string)
     upgrade_string := add_string
     upgrade_string = %start_string%%upgrade_string%
     loop, 4
     {
       x += offsetx
-      tack := tack(x, y, upgrade_string)
+      dart := dart(x, y, upgrade_string)
       upgrade_string = %upgrade_string%%add_string%
     }
     y += offsety
@@ -71,7 +68,7 @@ place_batch(startx, starty, offsetx, offsety
 
 one_paths()
 {
-  tack := tack(297, 137)
+  dart := dart(297, 137)
   place_batch(78, 310, 115, 115, [1, 2, 3], [1, 2, 3])
 }
 

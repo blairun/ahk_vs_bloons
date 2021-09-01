@@ -67,7 +67,7 @@ double_check()
   return 0
 }
 
-wait_um(c) ; this wait should be -> c * um()
+wait_um(c)
 {
   loop, %c%
   {
@@ -75,10 +75,9 @@ wait_um(c) ; this wait should be -> c * um()
   }
 }
 
-ability(n, a=0)
+ability(n)
 {
-  if (a == 0)
-    outputdebug, ability %n%
+  outputdebug, ability %n%
   send {%n%}
   um()
 }
@@ -87,32 +86,32 @@ auto_ability()
 {
   i = 2
   l := always_ability.maxindex()
-  out = |
   while i <= l
   {
-    ability(always_ability[i], 1)
-    i := i - 1
-    out = %out% %i%
-    i := i + 2
+    ability(always_ability[i])
+    i++
   }
-  outputdebug, %out%
 }
 
 continue()
 {
-  dance()
   wait()
+  dance()
+  outputdebug, FREEPLAY!!!
+  wait_um(7)
   click([961, 908])
-  wait(1)
+  wait_um(7)
   click([961, 908])
-  wait(1)
+  wait_um(7)
   click([1121, 857])
-  wait(1)
+  wait_um(7)
   click([1121, 857])
 }
 
 yes_paragon()
 {
+  outputdebug, d[0 0]b FEAR THE PARAGON d[0 0]b
+  wait_um(7)
   click([1131, 724])
 }
 
@@ -444,6 +443,7 @@ start()
 
 ok(round)
 {
+  outputdebug, |
   wait()
   um()
   send {space}

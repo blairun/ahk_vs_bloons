@@ -1,6 +1,6 @@
 upgrade_description(monkey, path)
 {
-  ; monkey = [x, y, tower_type, [0,0,0]] 4 var/array is how upgraded it is
+  ; monkey = [x, y, tower_type, [0,0,0]]
   type := monkey[3]
   path1_upgrades := monkey[4][1]
   path2_upgrades := monkey[4][2]
@@ -9,35 +9,36 @@ upgrade_description(monkey, path)
   switch path
   {
     case 1:
-      mp1++
-      pathX_upgrades := mp1
+      path1_upgrades++
+      pathX_upgrades := path1_upgrades
     case 2:
-      mp2++
-      pathX_upgrades := mp2
+      path2_upgrades++
+      pathX_upgrades := path2_upgrades
     case 3:
-      mp3++
-      pathX_upgrades := mp3
+      path3_upgrades++
+      pathX_upgrades := path3_upgrades
     default: outputdebug, ERROR -%path%- is not matching with 1 2 or 3
   }
 
   switch 5 ; is tower becoming or already tier 5?
   {
-    case mp1:
+    case path1_upgrades:
       path = 1
       pathX_upgrades = 5
-    case mp2:
+    case path2_upgrades:
       path = 2
       pathX_upgrades = 5
-    case mp3:
+    case path3_upgrades:
       path = 3
       pathX_upgrades = 5
     default: path := path
   }
   upgrade = %type%%path%%pathX_upgrades%
+  outputdebug, spam debug ... type|path|upgrade ... %upgrade%
 
   switch upgrade
   {
-    case RegExMatch(upgrade, ".*6.*"): out = PARAGON MUHAHAHA
+    case RegExMatch(upgrade, "[a-z][1-3]6"): out = PARAGON MUHAHAHA
 
     case "dart11": out = green tail
     case "dart12": out = red tail
@@ -393,9 +394,9 @@ upgrade_description(monkey, path)
 
     default: out = ERROR
   }
-
-  monkey[4] := [mp1, mp2, mp3]
-  outputdebug, upgrading %type%  \\\  %mp1% %mp2% %mp3%
+  monkey[4] := [path1_upgrades, path2_upgrades, path3_upgrades]
+  outputdebug
+    , upgrading %type%  \\\  %path1_upgrades% %path2_upgrades% %path3_upgrades%
   return_string = %type%  ///  %out%
   return return_string
 }

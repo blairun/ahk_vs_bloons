@@ -15,54 +15,49 @@ go()
   return
 }
 
-F1:: ; music / lets go
+F1:: ; lets go - 1 like start or begining
 go()
 return
 
-F2:: ; speaker minus / unused
+F2:: ; temp script - pick a 2sday
+temp_monkey()
 return
 
-F3:: ; speaker plus / unused
+F3::
 return
 
-F4:: ; speaker x / unused
+F4::
 return
 
-F5:: ; stop / pause
+F5:: ; pause - 5 stopping right in the middle
 pause()
 return
 
-F6:: ; back / home screen
-; need to pause or reload first
-to_menu()
-return
-
-F7:: ; play pause / unused
-return
-
-F8:: ; play / unpause
+F6:: ; continue - 6 is after 5
 outputdebug, playing
 pause, off
 return
 
-F9:: ; mail / color debug
-loop, 10
-{
-  pixelgetcolor, out, 1805, 1013
-  outputdebug, play button color: %out%
-  end(1)
-}
+F7::
 return
 
-F10:: ; home / reset reload
+F8::
+return
+
+F9::
+return
+
+F10:: ; reset reload - 10 has a 0 fresh slate
 reload
 return
 
-F11:: ; lock / temp_monkey
-temp_monkey()
+F11:: ; to menu - 11 kind of unique use case like a prime
+; need to pause or reload first
+to_menu()
+
 return
 
-F12:: ; get mouse location
+F12:: ; get mouse location - 12 not between 1 and 10 used for coding
 mousegetpos, xpos, ypos
 pixelgetcolor, out, xpos, ypos
 outputdebug, cursor x: %xpos% y: %ypos%
